@@ -1,0 +1,59 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MauiAppCoach.MainPage">
+
+    <VerticalStackLayout Padding="20" Spacing="15" VerticalOptions="Fill">
+
+        <Label Text="Coach" 
+           FontSize="24" 
+           FontAttributes="Bold" 
+           Margin="0,0,0,10"/>
+
+        <Entry x:Name="entPoids" 
+           Placeholder="Poids en Kgs" 
+           Keyboard="Numeric" 
+           TextColor="White" 
+           FontSize="18"/>
+
+        <Entry x:Name="entTaille" 
+           Placeholder="Taille en cm" 
+           Keyboard="Numeric" 
+           TextColor="White" 
+           FontSize="18"/>
+
+        <Entry x:Name="entAge" 
+           Placeholder="Age" 
+           Keyboard="Numeric" 
+           TextColor="White" 
+           FontSize="18"/>
+
+        <HorizontalStackLayout Spacing="20" VerticalOptions="Center">
+            <RadioButton x:Name="rbHomme" Content="Homme" IsChecked="True" />
+            <RadioButton x:Name="rbFemme" Content="Femme" />
+        </HorizontalStackLayout>
+
+        <Button x:Name="btnCalculer"
+            Text="Calculer IMG"
+            BackgroundColor="#512BD4"
+            TextColor="White"
+            CornerRadius="10"
+            HeightRequest="50"
+            SemanticProperties.Hint="Calculate IMG"
+            HorizontalOptions="Fill"
+            Clicked="btnCalculer_Clicked"/>
+
+        <Image x:Name="imgResultat"
+           Source="smiley_parfait.png"
+           HeightRequest="150"
+           HorizontalOptions="Center"
+           Margin="0,20,0,0"/>
+
+        <Label x:Name="lblResultat"
+           Text="Votre IMG :"
+           FontSize="20"
+           HorizontalTextAlignment="Center"
+           Margin="0,10,0,0"/>
+
+    </VerticalStackLayout>
+</ContentPage>

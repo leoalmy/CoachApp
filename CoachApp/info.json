@@ -1,0 +1,20 @@
+{
+  "description": "Une application mobile multi-plateforme développée avec .NET MAUI pour calculer et analyser l'Indice de Masse Grasse (IMG)",
+  "tags": [
+    ".NET MAUI",
+    ".NET Framework",
+    "C#",
+    "XAML",
+    "Mobile App",
+    "Android",
+    "iOS",
+    "Windows",
+    "macOS",
+    "Tizen",
+    "Desktop App",
+    "Multi-platform",
+    "Health App",
+    "Coaching",
+    "API"
+  ]
+}

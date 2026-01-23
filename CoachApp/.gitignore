@@ -1,0 +1,172 @@
+# Build results
+[Dd]ebug/
+[Dd]ebugPublic/
+[Rr]elease/
+[Rr]eleases/
+x64/
+x86/
+[Ww][Ii][Nn]32/
+[Aa][Rr][Mm]/
+[Aa][Rr][Mm]64/
+bld/
+[Bb]in/
+[Oo]bj/
+[Ll]og/
+[Ll]ogs/
+
+# Visual Studio
+.vs/
+.vscode/
+*.sln.docstates
+*.user
+*.userosscache
+*.sln.user
+*.suo
+*.ncb
+*.VC.db
+*.VC.VC.opendb
+
+# Visual Studio Code
+.vscode/
+*.code-workspace
+
+# Rider
+.idea/
+*.sln.iml
+*.iml
+
+# ReSharper
+_ReSharper*/
+*.[Rr]e[Ss]harper
+*.DotSettings.user
+
+# NuGet
+*.nupkg
+*.snupkg
+.nuget/
+
+# Build artifacts
+artifacts/
+publish/
+PublishProfiles/
+
+# MAUI
+.maui/
+.maui-cache/
+
+# Local environment files
+*.local
+.env
+.env.local
+.env.*.local
+
+# User-specific files
+launchSettings.json
+
+# Android
+Android/
+.gradle/
+local.properties
+*.apk
+*.aar
+*.ap_
+*.aab
+*.dex
+*.class
+*.jar
+
+# iOS
+ios/
+*.ipa
+*.dSYM
+
+# Test Results
+TestResults/
+*.trx
+*.coverage
+*.coveragexml
+coverage/
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+*.xcworkspace/
+xcuserdata/
+
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# Temporary files
+*.tmp
+*.temp
+*.bak
+*~
+*.swp
+*.swo
+
+# Build logs
+*.log
+msbuild.log
+msbuild.err
+msbuild.wrn
+
+# MSBuild
+*.rsp
+
+# Visual Studio cache/options
+.cache/
+.vs/
+.vscode/
+
+# Runtime configuration files
+appsettings.*.json
+!appsettings.json
+runtimeconfig.json
+
+# Certificates and keys
+*.pfx
+*.p12
+*.pem
+*.key
+*.crt
+
+# Database files
+*.db
+*.sqlite
+*.sqlite3
+
+# Coverage reports
+coverage/
+*.coverage
+*.coveragexml
+
+# Test Results
+TestResults/
+*.trx
+
+# Keystore files
+*.jks
+*.keystore
+
+# gradle/wrapper/
+.gradle/
+
+# Miscellaneous
+*.DS_Store
+thumbs.db
+.localhistory/
+.vscode/
+vscode-settings/
+*.orig
+*.rej
+
+# Platform-specific paths
+Platforms/*/bin/
+Platforms/*/obj/
+
+# Generated files
+*.designer.cs
+GlobalXmlns.g.cs

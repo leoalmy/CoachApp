@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<runsettings>
+  <RunConfiguration>
+    <MaxCpuCount>4</MaxCpuCount>
+    <ResultsDirectory>.\TestResults</ResultsDirectory>
+  </RunConfiguration>
+</runsettings>
