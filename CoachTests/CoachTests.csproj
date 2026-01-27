@@ -20,7 +20,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\CoachModele\CoachModele.csproj" />
+    <ProjectReference Include="..\CoachLibrairie\CoachLibrairie.csproj" />
   </ItemGroup>
 
 </Project>

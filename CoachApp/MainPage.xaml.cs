@@ -1,4 +1,4 @@
-﻿using CoachModele;
+﻿using CoachLibrairie; 
 
 namespace MauiAppCoach
 {
@@ -12,12 +12,14 @@ namespace MauiAppCoach
     /// </summary>
     public partial class MainPage : ContentPage
     {
+        private readonly string nomFichier = "saveprofil"; // Nom du fichier de sauvegarde pour la sérialisation
         /// <summary>
         /// Initialise une nouvelle instance de la page principale.
         /// </summary>
         public MainPage()
         {
             InitializeComponent();
+            RecupProfil();
         }
 
         /// <summary>
@@ -32,7 +34,7 @@ namespace MauiAppCoach
         /// </summary>
         /// <param name="sender">L'objet qui a déclenché l'événement (le bouton)</param>
         /// <param name="e">Les arguments de l'événement</param>
-        private void btnCalculer_Clicked(object sender, EventArgs e)
+        private async void btnCalculer_Clicked(object sender, EventArgs e)
         {
             try
             {
@@ -47,33 +49,73 @@ namespace MauiAppCoach
                 // 2. Création de l'objet Profil (le calcul se fait dans le constructeur)
                 Profil leProfil = new(sexe, poids, taille, age);
 
-                // 3. Affichage du résultat numérique et du message
-                lblResultat.Text = string.Format("Votre IMG : {0:f2}% - {1}",
-                                    leProfil.GetImg(),
-                                    leProfil.GetMessage());
+                Serializer.Serialize(FileSystem.AppDataDirectory, nomFichier, leProfil); // Sauvegarde du profil
 
-                // 4. Mise à jour de l'image en fonction du message
-                // Les fichiers doivent être dans Resources/Images sans l'extension
-                string nomImage = "";
-                switch (leProfil.GetMessage())
-                {
-                    case "Trop maigre.":
-                        nomImage = "smiley_tropmaigre";
-                        break;
-                    case "Parfait.":
-                        nomImage = "smiley_parfait";
-                        break;
-                    case "Surpoids.":
-                        nomImage = "smiley_surpoids";
-                        break;
-                }
-                imgResultat.Source = nomImage;
+                await AffichageResultatAsync(leProfil);
             }
             catch (Exception)
             {
                 // Gestion d'erreur en cas de saisie incorrecte (ex: texte au lieu de chiffre)
-                DisplayAlert("Erreur", "Veuillez saisir des valeurs numériques valides.", "OK");
+                await DisplayAlert("Erreur", "Veuillez saisir des valeurs numériques valides.", "OK");
             }
+        }
+
+        private async void RecupProfil()
+        {
+            try
+            {
+                Profil unProfil = null;
+                unProfil = Serializer.Deserialize(FileSystem.AppDataDirectory, nomFichier);
+
+                if (unProfil != null)
+                {
+                    entPoids.Text = unProfil.Poids.ToString();
+                    entTaille.Text = unProfil.Taille.ToString();
+                    entAge.Text = unProfil.Age.ToString();
+                    rbHomme.IsChecked = (unProfil.Sexe == 1);
+                    rbFemme.IsChecked = (unProfil.Sexe == 0);
+
+                    await AffichageResultatAsync(unProfil);
+                }
+            }
+            catch (Exception ex)
+            {
+                await DisplayAlert("Erreur", "Erreur lors de la récupération des données", "Ok");
+            }
+        }
+
+        private async Task AffichageResultatAsync(Profil leProfil)
+        {
+            // 1. Préparation (on cache pour l'animation)
+            imgResultat.Opacity = 0;
+            lblResultat.Opacity = 0;
+
+            // 2. Mise à jour des contenus
+            lblResultat.Text = $"Votre IMG : {leProfil.Img:f2}% - {leProfil.Message}";
+
+            if (leProfil.Message == "Parfait.")
+            {
+                lblResultat.TextColor = Colors.Green;
+                imgResultat.Source = "smiley_parfait";
+                // Optionnel : Une petite vibration très courte pour le succès
+                Vibration.Default.Vibrate(TimeSpan.FromMilliseconds(50));
+            }
+            else
+            {
+                lblResultat.TextColor = Colors.DarkRed;
+                imgResultat.Source = leProfil.Message == "Trop maigre." ? "smiley_tropmaigre" : "smiley_surpoids";
+
+                // --- LA VIBRATION "ALERTE" ---
+                // On fait vibrer pendant 500ms si le résultat n'est pas "Parfait"
+                if (Vibration.Default.IsSupported)
+                    Vibration.Default.Vibrate(TimeSpan.FromMilliseconds(500));
+            }
+
+            // 3. Lancement des animations
+            await Task.WhenAll(
+                imgResultat.FadeTo(1, 600),
+                lblResultat.FadeTo(1, 600)
+            );
         }
     }
 }

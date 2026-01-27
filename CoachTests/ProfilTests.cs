@@ -1,5 +1,5 @@
 ﻿using Xunit;
-using CoachModele;
+using CoachLibrairie;
 
 namespace Coach.Tests
 {
@@ -11,24 +11,23 @@ namespace Coach.Tests
         public void Femme_MoinsVingtCinq_RetourneTropMaigre()
         {
             // Arrange
-            // Avec 45kg pour 1m65, l'IMG sera très bas
             var profil = new Profil(sexe: 0, poids: 45f, taille: 165, age: 25);
 
             // Act & Assert
-            Assert.Equal("Trop maigre.", profil.GetMessage());
-            Assert.True(profil.GetImg() < 25);
+            // On retire les parenthèses () car ce sont des propriétés maintenant
+            Assert.Equal("Trop maigre.", profil.Message);
+            Assert.True(profil.Img < 25);
         }
 
         [Fact]
         public void Femme_Entre25et30_RetourneParfait()
         {
             // Arrange
-            // 63kg, 1m65, 30 ans => IMG environ 28.5 (donc entre 25 et 30)
             var profil = new Profil(sexe: 0, poids: 63f, taille: 165, age: 30);
 
             // Act & Assert
-            Assert.Equal("Parfait.", profil.GetMessage());
-            Assert.InRange(profil.GetImg(), 25, 30);
+            Assert.Equal("Parfait.", profil.Message);
+            Assert.InRange(profil.Img, 25, 30);
         }
 
         [Fact]
@@ -38,8 +37,8 @@ namespace Coach.Tests
             var profil = new Profil(sexe: 0, poids: 90f, taille: 160, age: 35);
 
             // Act & Assert
-            Assert.Equal("Surpoids.", profil.GetMessage());
-            Assert.True(profil.GetImg() > 30);
+            Assert.Equal("Surpoids.", profil.Message);
+            Assert.True(profil.Img > 30);
         }
 
         // --- Tests pour le calcul IMG - Hommes (sexe = 1) ---
@@ -51,20 +50,19 @@ namespace Coach.Tests
             var profil = new Profil(sexe: 1, poids: 50f, taille: 180, age: 25);
 
             // Act & Assert
-            Assert.Equal("Trop maigre.", profil.GetMessage());
-            Assert.True(profil.GetImg() < 15);
+            Assert.Equal("Trop maigre.", profil.Message);
+            Assert.True(profil.Img < 15);
         }
 
         [Fact]
         public void Homme_Entre15et20_RetourneParfait()
         {
             // Arrange
-            // 72kg, 1m80, 30 ans => IMG environ 18.5 (Parfait pour un homme)
             var profil = new Profil(sexe: 1, poids: 72f, taille: 180, age: 30);
 
             // Act & Assert
-            Assert.Equal("Parfait.", profil.GetMessage());
-            Assert.InRange(profil.GetImg(), 15, 20);
+            Assert.Equal("Parfait.", profil.Message);
+            Assert.InRange(profil.Img, 15, 20);
         }
 
         [Fact]
@@ -74,8 +72,60 @@ namespace Coach.Tests
             var profil = new Profil(sexe: 1, poids: 100f, taille: 175, age: 35);
 
             // Act & Assert
-            Assert.Equal("Surpoids.", profil.GetMessage());
-            Assert.True(profil.GetImg() > 20);
+            Assert.Equal("Surpoids.", profil.Message);
+            Assert.True(profil.Img > 20);
+        }
+    }
+
+    public class SerializerTests
+    {
+        private readonly string _testFolder;
+        private readonly string _testFileName = "test_profil.json";
+
+        public SerializerTests()
+        {
+            // On utilise un dossier temporaire pour ne pas polluer les vraies données
+            _testFolder = Path.GetTempPath();
+        }
+
+        [Fact]
+        public void Serialize_Puis_Deserialize_RetourneObjetIdentique()
+        {
+            // 1. ARRANGE (On crée un profil de test)
+            var profilInitial = new Profil(sexe: 1, poids: 80f, taille: 180, age: 30);
+
+            // Nettoyage au cas où un vieux fichier traîne
+            string cheminComplet = Path.Combine(_testFolder, _testFileName);
+            if (File.Exists(cheminComplet)) File.Delete(cheminComplet);
+
+            // 2. ACT
+            // On sauvegarde
+            Serializer.Serialize(_testFolder, _testFileName, profilInitial);
+
+            // On recharge
+            var profilRecupere = Serializer.Deserialize(_testFolder, _testFileName);
+
+            // 3. ASSERT
+            Assert.NotNull(profilRecupere);
+            Assert.Equal(profilInitial.Sexe, profilRecupere.Sexe);
+            Assert.Equal(profilInitial.Poids, profilRecupere.Poids);
+            Assert.Equal(profilInitial.Taille, profilRecupere.Taille);
+            Assert.Equal(profilInitial.Age, profilRecupere.Age);
+            Assert.Equal(profilInitial.Img, profilRecupere.Img);
+            Assert.Equal(profilInitial.Message, profilRecupere.Message);
+
+            // Nettoyage après le test
+            if (File.Exists(cheminComplet)) File.Delete(cheminComplet);
+        }
+
+        [Fact]
+        public void Deserialize_FichierInexistant_RetourneNull()
+        {
+            // ACT
+            var resultat = Serializer.Deserialize(_testFolder, "fichier_qui_n_existe_pas.json");
+
+            // ASSERT
+            Assert.Null(resultat);
         }
     }
 }
