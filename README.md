@@ -1,3 +1,18 @@
+<details>
+  <summary><b>📜 Historique des versions (cliquer pour dérouler)</b></summary>
+
+  ### v2.0 (Dernière version)
+  - Sérialisation JSON et persistance.
+  - Architecture en bibliothèque de classes.
+  - Animations et vibrations.
+  - Disponible sur la branche : [v2-serialisation-json](https://github.com/leoalmy/CoachApp/tree/v2-serialisation-json)
+
+  ### v1.0 (Version actuelle)
+  - Calcul d'IMG de base.
+  - Interface utilisateur initiale.
+  - Logique métier intégrée au projet principal.
+</details>
+
 Une application mobile multi-plateforme développée avec **.NET MAUI** pour calculer et analyser l'Indice de Masse Grasse (IMG) des utilisateurs.
 
 ## 🎯 Objectif
@@ -233,11 +248,6 @@ La suite de tests couvre :
 - ✅ Les variations par sexe
 - ✅ Les valeurs extrêmes (jeune âge, âge avancé)
 - ✅ La validation des sorties (IMG positive, message valide)
-
-## 📝 Notes de Version
-
-- **v2.0** : Sérialisation JSON des profils, gestion persistante des données utilisateur et améliorations de l'interface. Disponible [ici](https://github.com/leoalmy/CoachApp/tree/v2-serialisation-json)
-- **v1.0** : Version initiale avec calcul d'IMG de base pour Android
 
 ## 📄 Licence
 
