@@ -1,3 +1,17 @@
+<details>
+  <summary><b>📜 Historique des versions (cliquer pour dérouler)</b></summary>
+
+  ### v2.0
+  - Sérialisation JSON des profils.
+  - Gestion persistante des données via `FileSystem.AppDataDirectory`.
+  - Ajout de la bibliothèque de classes `CoachLibrairie`.
+  - Animations UI (`FadeTo`) et feedback haptique.
+
+  ### v1.0
+  - [Version initiale](https://github.com/leoalmy/CoachApp/tree/main) : Calcul d'IMG de base pour Android.
+</details>
+
+
 Application mobile développée avec **.NET MAUI** pour calculer, analyser et **sauvegarder** l'Indice de Masse Grasse (IMG).
 
 ## 🆕 Nouveautés de la Version 2
