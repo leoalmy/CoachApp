@@ -8,7 +8,7 @@
   - Animations UI (`FadeTo`) et feedback haptique.
 
   ### v1.0
-  - [Version initiale](https://github.com/leoalmy/CoachApp/tree/main) : Calcul d'IMG de base pour Android.
+  - [Version initiale](https://github.com/leoalmy/CoachApp) : Calcul d'IMG de base pour Android.
 </details>
 
 
