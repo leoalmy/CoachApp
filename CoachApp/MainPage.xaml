@@ -41,7 +41,7 @@
             HeightRequest="50"
             SemanticProperties.Hint="Calculate IMG"
             HorizontalOptions="Fill"
-            Clicked="btnCalculer_Clicked"/>
+            Clicked="BtnCalculer_Clicked"/>
 
         <Image x:Name="imgResultat"
            Source="smiley_parfait.png"

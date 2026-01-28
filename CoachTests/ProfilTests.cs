@@ -1,7 +1,7 @@
 ﻿using Xunit;
 using CoachLibrairie;
 
-namespace Coach.Tests
+namespace CoachTests
 {
     public class ProfilTests
     {

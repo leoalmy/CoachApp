@@ -34,7 +34,7 @@ namespace MauiAppCoach
         /// </summary>
         /// <param name="sender">L'objet qui a déclenché l'événement (le bouton)</param>
         /// <param name="e">Les arguments de l'événement</param>
-        private async void btnCalculer_Clicked(object sender, EventArgs e)
+        private async void BtnCalculer_Clicked(object sender, EventArgs e)
         {
             try
             {
@@ -97,18 +97,24 @@ namespace MauiAppCoach
             {
                 lblResultat.TextColor = Colors.Green;
                 imgResultat.Source = "smiley_parfait";
-                // Optionnel : Une petite vibration très courte pour le succès
-                Vibration.Default.Vibrate(TimeSpan.FromMilliseconds(50));
+                // Une petite vibration très courte pour le succès
+                Vibration.Default.Vibrate(TimeSpan.FromMilliseconds(1001));
             }
             else
             {
-                lblResultat.TextColor = Colors.DarkRed;
+                lblResultat.TextColor = Colors.Red;
                 imgResultat.Source = leProfil.Message == "Trop maigre." ? "smiley_tropmaigre" : "smiley_surpoids";
 
                 // --- LA VIBRATION "ALERTE" ---
                 // On fait vibrer pendant 500ms si le résultat n'est pas "Parfait"
-                if (Vibration.Default.IsSupported)
-                    Vibration.Default.Vibrate(TimeSpan.FromMilliseconds(500));
+                // Première vibration longue de 2s
+                Vibration.Default.Vibrate(TimeSpan.FromMilliseconds(1001));
+
+                // On attend 2,2 secondes (le temps que la 1ère finisse + petite pause)
+                await Task.Delay(1200);
+
+                // Deuxième vibration longue de 2s
+                Vibration.Default.Vibrate(TimeSpan.FromMilliseconds(1001));
             }
 
             // 3. Lancement des animations
