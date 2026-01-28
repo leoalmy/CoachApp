@@ -12,14 +12,12 @@ namespace MauiAppCoach
     /// </summary>
     public partial class MainPage : ContentPage
     {
-        private readonly string nomFichier = "saveprofil"; // Nom du fichier de sauvegarde pour la sérialisation
         /// <summary>
         /// Initialise une nouvelle instance de la page principale.
         /// </summary>
         public MainPage()
         {
             InitializeComponent();
-            RecupProfil();
         }
 
         /// <summary>
@@ -49,38 +47,12 @@ namespace MauiAppCoach
                 // 2. Création de l'objet Profil (le calcul se fait dans le constructeur)
                 Profil leProfil = new(sexe, poids, taille, age);
 
-                Serializer.Serialize(FileSystem.AppDataDirectory, nomFichier, leProfil); // Sauvegarde du profil
-
                 await AffichageResultatAsync(leProfil);
             }
             catch (Exception)
             {
                 // Gestion d'erreur en cas de saisie incorrecte (ex: texte au lieu de chiffre)
                 await DisplayAlert("Erreur", "Veuillez saisir des valeurs numériques valides.", "OK");
-            }
-        }
-
-        private async void RecupProfil()
-        {
-            try
-            {
-                Profil unProfil = null;
-                unProfil = Serializer.Deserialize(FileSystem.AppDataDirectory, nomFichier);
-
-                if (unProfil != null)
-                {
-                    entPoids.Text = unProfil.Poids.ToString();
-                    entTaille.Text = unProfil.Taille.ToString();
-                    entAge.Text = unProfil.Age.ToString();
-                    rbHomme.IsChecked = (unProfil.Sexe == 1);
-                    rbFemme.IsChecked = (unProfil.Sexe == 0);
-
-                    await AffichageResultatAsync(unProfil);
-                }
-            }
-            catch (Exception ex)
-            {
-                await DisplayAlert("Erreur", "Erreur lors de la récupération des données", "Ok");
             }
         }
 

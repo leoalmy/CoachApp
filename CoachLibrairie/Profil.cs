@@ -1,65 +1,119 @@
-﻿using System;
+﻿using SQLite;
+using System;
 
-namespace CoachLibrairie
+[Serializable]
+public class Profil
 {
-    [Serializable]
-    public class Profil
+    // --- Attributs privés ---
+    private DateTimeOffset datemesure;
+    private int sexe;
+    private int poids;
+    private int taille;
+    private int age;
+    private double img;
+    private string message;
+
+    // --- Constructeurs ---
+
+    public Profil(int? unId, DateTimeOffset uneDate, int unPoids, int uneTaille, int unAge, int unSexe)
     {
-        // Propriétés automatiques (indispensables pour la sérialisation JSON)
-        public int Sexe { get; set; }    // 0 pour Femme, 1 pour Homme
-        public float Poids { get; set; } // en Kg
-        public int Taille { get; set; }  // en cm
-        public int Age { get; set; }     // en années
-        public float Img { get; set; }   // Indice de Masse Grasse
-        public string Message { get; set; } // Résultat interprété
+        // On passe par les propriétés pour déclencher les logiques si besoin
+        this.Id = unId ?? 0; // Gestion du null pour la BDD
+        this.Datemesure = uneDate;
+        this.Poids = unPoids;
+        this.Taille = uneTaille;
+        this.Age = unAge;
+        this.Sexe = unSexe;
 
-        /// <summary>
-        /// Constructeur vide : INDISPENSABLE pour la désérialisation JSON
-        /// </summary>
-        public Profil() { }
+        CalculIMG();
+        ResultatIMG();
+    }
 
-        /// <summary>
-        /// Constructeur principal : utilisé lors du clic sur le bouton "Calculer"
-        /// </summary>
-        public Profil(int sexe, float poids, int taille, int age)
+    public Profil()
+    {
+        this.datemesure = DateTimeOffset.Now;
+        this.sexe = 0;
+        this.poids = 0;
+        this.taille = 0;
+        this.age = 0;
+        this.img = 0;
+        this.message = "";
+    }
+
+    // --- Propriétés (Getters / Setters) ---
+
+    [PrimaryKey, AutoIncrement]
+    public int Id { get; set; }
+
+    public DateTimeOffset Datemesure
+    {
+        get => datemesure;
+        set => datemesure = value;
+    }
+
+    public int Sexe
+    {
+        get => sexe;
+        set => sexe = value;
+    }
+
+    public int Poids
+    {
+        get => poids;
+        set => poids = value;
+    }
+
+    public int Taille
+    {
+        get => taille;
+        set => taille = value;
+    }
+
+    public int Age
+    {
+        get => age;
+        set => age = value;
+    }
+
+    public double Img
+    {
+        get => img;
+        set => img = value;
+    }
+
+    public string Message
+    {
+        get => message;
+        set => message = value;
+    }
+
+    // --- Méthodes de calcul ---
+
+    private void CalculIMG()
+    {
+        if (this.Taille == 0) return; // Évite la division par zéro
+
+        // Conversion de la taille en mètres
+        double tailleMetre = (double)this.Taille / 100;
+
+        // Formule de Deurenberg : (1.2 * IMC) + (0.23 * Age) - (10.83 * Sexe) - 5.4
+        // IMC = Poids / (Taille en m)²
+        this.Img = (1.2 * this.Poids / (tailleMetre * tailleMetre)) + (0.23 * this.Age) - (10.83 * this.Sexe) - 5.4;
+    }
+
+    private void ResultatIMG()
+    {
+        if (this.Sexe == 0) // Femmes
         {
-            this.Sexe = sexe;
-            this.Poids = poids;
-            this.Taille = taille;
-            this.Age = age;
-            this.CalculIMG();
-            this.ResultatIMG();
+            if (this.Img < 25) this.Message = "Trop maigre.";
+            else if (this.Img <= 30) this.Message = "Parfait.";
+            else this.Message = "Surpoids.";
         }
-
-        /// <summary>
-        /// Calcule l'indice de masse grasse
-        /// </summary>
-        private void CalculIMG()
+        else // Hommes
         {
-            // Conversion de la taille en mètres pour la formule
-            float tailleMetre = (float)this.Taille / 100;
-
-            // Formule : (1,2 * IMC) + (0,23 * Age) - (10,83 * Sexe) - 5,4
-            this.Img = (float)((1.2 * this.Poids / (tailleMetre * tailleMetre)) + (0.23 * this.Age) - (10.83 * this.Sexe) - 5.4);
-        }
-
-        /// <summary>
-        /// Interprète l'IMG et valorise le message
-        /// </summary>
-        private void ResultatIMG()
-        {
-            if (this.Sexe == 0) // Cas pour les femmes
-            {
-                if (this.Img < 25) this.Message = "Trop maigre.";
-                else if (this.Img <= 30) this.Message = "Parfait.";
-                else this.Message = "Surpoids.";
-            }
-            else // Cas pour les hommes
-            {
-                if (this.Img < 15) this.Message = "Trop maigre.";
-                else if (this.Img <= 20) this.Message = "Parfait.";
-                else this.Message = "Surpoids.";
-            }
+            if (this.Img < 15) this.Message = "Trop maigre.";
+            else if (this.Img <= 20) this.Message = "Parfait.";
+            else this.Message = "Surpoids.";
         }
     }
 }
