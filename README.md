@@ -1,13 +1,19 @@
 <details>
   <summary><b>📜 Historique des versions (cliquer pour dérouler)</b></summary>
 
-  ### v2.0 (Dernière version)
+  v3.0 (Dernière version)
+  - Migration vers SQLite pour une gestion robuste des données.
+  - Historique complet et gestion CRUD (Create, Read, Update, Delete).
+  - Tests unitaires isolés via base de données In-Memory.
+  - Disponible à cette adresse -> [v3.0](https://github.com/leoalmy/CoachApp/tree/v3-database-sqlite)
+  
+  v2.0
   - Sérialisation JSON et persistance.
   - Architecture en bibliothèque de classes.
   - Animations et vibrations.
-  - Disponible sur la branche : [v2-serialisation-json](https://github.com/leoalmy/CoachApp/tree/v2-serialisation-json)
+  - Disponible à cette adresse -> [v2.0](https://github.com/leoalmy/CoachApp/tree/v2-serialisation-json)
 
-  ### v1.0 (Version actuelle)
+  v1.0 
   - Calcul d'IMG de base.
   - Interface utilisateur initiale.
   - Logique métier intégrée au projet principal.
