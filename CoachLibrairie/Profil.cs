@@ -5,6 +5,7 @@ using System;
 public class Profil
 {
     // --- Attributs privés ---
+    private readonly Nullable<int> id;
     private DateTimeOffset datemesure;
     private int sexe;
     private int poids;

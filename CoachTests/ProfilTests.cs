@@ -1,5 +1,4 @@
 ﻿using Xunit;
-using CoachLibrairie;
 
 namespace CoachTests
 {
@@ -10,11 +9,10 @@ namespace CoachTests
         [Fact]
         public void Femme_MoinsVingtCinq_RetourneTropMaigre()
         {
-            // Arrange
-            var profil = new Profil(sexe: 0, poids: 45f, taille: 165, age: 25);
+            // Arrange - Ordre: (Id, Date, Poids, Taille, Age, Sexe)
+            var profil = new Profil(null, DateTimeOffset.Now, unPoids: 45, uneTaille: 165, unAge: 25, unSexe: 0);
 
             // Act & Assert
-            // On retire les parenthèses () car ce sont des propriétés maintenant
             Assert.Equal("Trop maigre.", profil.Message);
             Assert.True(profil.Img < 25);
         }
@@ -23,7 +21,7 @@ namespace CoachTests
         public void Femme_Entre25et30_RetourneParfait()
         {
             // Arrange
-            var profil = new Profil(sexe: 0, poids: 63f, taille: 165, age: 30);
+            var profil = new Profil(null, DateTimeOffset.Now, unPoids: 63, uneTaille: 165, unAge: 30, unSexe: 0);
 
             // Act & Assert
             Assert.Equal("Parfait.", profil.Message);
@@ -34,7 +32,7 @@ namespace CoachTests
         public void Femme_PlusTrente_RetourneSurpoids()
         {
             // Arrange
-            var profil = new Profil(sexe: 0, poids: 90f, taille: 160, age: 35);
+            var profil = new Profil(null, DateTimeOffset.Now, unPoids: 90, uneTaille: 160, unAge: 35, unSexe: 0);
 
             // Act & Assert
             Assert.Equal("Surpoids.", profil.Message);
@@ -47,7 +45,7 @@ namespace CoachTests
         public void Homme_MoinsQuinze_RetourneTropMaigre()
         {
             // Arrange
-            var profil = new Profil(sexe: 1, poids: 50f, taille: 180, age: 25);
+            var profil = new Profil(null, DateTimeOffset.Now, unPoids: 50, uneTaille: 180, unAge: 25, unSexe: 1);
 
             // Act & Assert
             Assert.Equal("Trop maigre.", profil.Message);
@@ -58,7 +56,7 @@ namespace CoachTests
         public void Homme_Entre15et20_RetourneParfait()
         {
             // Arrange
-            var profil = new Profil(sexe: 1, poids: 72f, taille: 180, age: 30);
+            var profil = new Profil(null, DateTimeOffset.Now, unPoids: 72, uneTaille: 180, unAge: 30, unSexe: 1);
 
             // Act & Assert
             Assert.Equal("Parfait.", profil.Message);
@@ -69,7 +67,7 @@ namespace CoachTests
         public void Homme_PlusVingt_RetourneSurpoids()
         {
             // Arrange
-            var profil = new Profil(sexe: 1, poids: 100f, taille: 175, age: 35);
+            var profil = new Profil(null, DateTimeOffset.Now, unPoids: 100, uneTaille: 175, unAge: 35, unSexe: 1);
 
             // Act & Assert
             Assert.Equal("Surpoids.", profil.Message);
