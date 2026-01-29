@@ -1,14 +1,22 @@
 <details>
   <summary><b>📜 Historique des versions (cliquer pour dérouler)</b></summary>
 
-  ### v2.0
-  - Sérialisation JSON des profils.
-  - Gestion persistante des données via `FileSystem.AppDataDirectory`.
-  - Ajout de la bibliothèque de classes `CoachLibrairie`.
-  - Animations UI (`FadeTo`) et feedback haptique.
+  v3.0 (Dernière version)
+  - Migration vers SQLite pour une gestion robuste des données.
+  - Historique complet et gestion CRUD (Create, Read, Update, Delete).
+  - Tests unitaires isolés via base de données In-Memory.
+  - Disponible à cette adresse -> [v3.0](https://github.com/leoalmy/CoachApp/tree/v3-database-sqlite)
+  
+  v2.0
+  - Sérialisation JSON et persistance.
+  - Architecture en bibliothèque de classes.
+  - Animations et vibrations.
 
-  ### v1.0
-  - [Version initiale](https://github.com/leoalmy/CoachApp) : Calcul d'IMG de base pour Android.
+  v1.0 
+  - Calcul d'IMG de base.
+  - Interface utilisateur initiale.
+  - Logique métier intégrée au projet principal.
+  - Disponible à cette adresse -> [v1.0](https://github.com/leoalmy/CoachApp)
 </details>
 
 
