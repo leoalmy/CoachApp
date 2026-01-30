@@ -2,7 +2,8 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MauiAppCoach.View.HistoPage"
-             Title="Historique">
+             Title="Historique"
+             BackgroundColor="{StaticResource PageBackgroundBrush}">
 
     <Grid RowDefinitions="Auto, *" 
           Padding="15">
@@ -11,7 +12,7 @@
                Text="Mes Profils"
                FontSize="18"
                FontAttributes="Bold"
-               TextColor="white"
+               TextColor="{StaticResource TextColorBrush}"
                HorizontalOptions="Start"
                Margin="0,0,0,15" />
 
@@ -25,7 +26,7 @@
 
                         <Label Grid.Column="0"
                                Text="{Binding DatemesureLocale, StringFormat='{0:dd/MM/yyyy HH:mm}'}"
-                               TextColor="#FFFFFF"
+                               TextColor="{StaticResource TextColorBrush}"
                                VerticalOptions="Center"
                                FontSize="18"/>
 

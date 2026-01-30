@@ -2,14 +2,15 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MauiAppCoach.View.MenuPage"
-             Title="Coach Menu">
+             Title="Coach Menu"
+             BackgroundColor="{StaticResource PageBackgroundBrush}">
 
     <Grid RowDefinitions="Auto, *, Auto"
           Padding="20"
           RowSpacing="20">
 
         <Border Grid.Row="0"
-                Stroke="Black"
+                Stroke="{AppThemeBinding Light={StaticResource Gray300}, Dark={StaticResource Gray500}}"
                 StrokeThickness="1"
                 StrokeShape="RoundRectangle 0"
                 Padding="15"
@@ -20,12 +21,13 @@
                    FontAttributes="Bold"
                    HorizontalOptions="Center"
                    VerticalOptions="Center"
-                   TextColor="white"
+                   TextColor="{StaticResource TextColorBrush}"
                    HorizontalTextAlignment="Center"/>
         </Border>
 
-        <Image Grid.Row="1"
-               Source="fitness_light.png"
+        <Image x:Name="imgFitness"
+               Grid.Row="1"
+               Source="{AppThemeBinding Light=fitness_light, Dark=fitness_dark}"
                Aspect="AspectFit"
                HorizontalOptions="Center"
                VerticalOptions="Center" />
@@ -34,16 +36,12 @@
                              Spacing="15">
 
             <Button Text="Calcul IMG"
-                    BackgroundColor="#512BD4"
-                    TextColor="White"
                     HeightRequest="55"
                     CornerRadius="8"
                     FontSize="18"
                     Clicked="BtnCalculIMG_Clicked"/>
 
             <Button Text="Mon historique"
-                    BackgroundColor="#512BD4"
-                    TextColor="White"
                     HeightRequest="55"
                     CornerRadius="8"
                     FontSize="18"

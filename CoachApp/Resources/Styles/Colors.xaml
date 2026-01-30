@@ -42,4 +42,29 @@
     <SolidColorBrush x:Key="Gray600Brush" Color="{StaticResource Gray600}"/>
     <SolidColorBrush x:Key="Gray900Brush" Color="{StaticResource Gray900}"/>
     <SolidColorBrush x:Key="Gray950Brush" Color="{StaticResource Gray950}"/>
+
+    <!-- AppThemeBinding pour les ressources de couleur dynamiques -->
+    <SolidColorBrush x:Key="PageBackgroundBrush">
+        <SolidColorBrush.Color>
+            <AppThemeBinding Light="White" Dark="#1f1f1f" />
+        </SolidColorBrush.Color>
+    </SolidColorBrush>
+
+    <SolidColorBrush x:Key="EntryBackgroundBrush">
+        <SolidColorBrush.Color>
+            <AppThemeBinding Light="#E1E1E1" Dark="#212121" />
+        </SolidColorBrush.Color>
+    </SolidColorBrush>
+
+    <SolidColorBrush x:Key="TextColorBrush">
+        <SolidColorBrush.Color>
+            <AppThemeBinding Light="Black" Dark="White" />
+        </SolidColorBrush.Color>
+    </SolidColorBrush>
+
+    <SolidColorBrush x:Key="PlaceholderColorBrush">
+        <SolidColorBrush.Color>
+            <AppThemeBinding Light="#919191" Dark="#6E6E6E" />
+        </SolidColorBrush.Color>
+    </SolidColorBrush>
 </ResourceDictionary>
