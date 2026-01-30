@@ -1,22 +1,28 @@
 <details>
   <summary><b>📜 Historique des versions (cliquer pour dérouler)</b></summary>
 
-  v3.0 (Dernière version)
-  - Migration vers SQLite pour une gestion robuste des données.
-  - Historique complet et gestion CRUD (Create, Read, Update, Delete).
-  - Tests unitaires isolés via base de données In-Memory.
-  - Disponible à cette adresse -> [v3.0](https://github.com/leoalmy/CoachApp/tree/v3-database-sqlite)
-  
-  v2.0
-  - Sérialisation JSON et persistance.
-  - Architecture en bibliothèque de classes.
-  - Animations et vibrations.
+  ### v4.0
+  - **Navigation multi-page** avec AppShell pour une meilleure expérience utilisateur.
+  - **Injection de dépendances** (DI) pour une architecture plus robuste et testable.
+  - **Page d'historique** : Consultation et visualisation des profils avec tri chronologique.
+  - **Architecture par couches** : Séparation claire entre UI (MAUI), logique métier et persistance.
+  - **Gestion centralisée de la base de données** : SQLiteDb enregistré en Singleton pour un accès unifié.
 
-  v1.0 
-  - Calcul d'IMG de base.
-  - Interface utilisateur initiale.
-  - Logique métier intégrée au projet principal.
-  - Disponible à cette adresse -> [v1.0](https://github.com/leoalmy/CoachApp)
+  ### v3.0
+  - **Passage de JSON à SQLite** pour une gestion robuste des données.
+  - **Historique complet** : Sauvegarde et consultation de tous les profils mesurés.
+  - **Modèle d'accès amélioré** : Classe `SQLiteDb` avec opérations CRUD asynchrones.
+  - **Gestion d'ID** : Intégration de clés primaires auto-incrémentées.
+  - **Tests asynchrones** : Suite de tests SQLite avec base de données en mémoire.
+
+  ### v2.0
+  - Sérialisation JSON des profils.
+  - Gestion persistante des données via `FileSystem.AppDataDirectory`.
+  - Ajout de la bibliothèque de classes `CoachLibrairie`.
+  - Animations UI (`FadeTo`) et feedback haptique.
+
+  ### v1.0
+  - [Version initiale](https://github.com/leoalmy/CoachApp) : Calcul d'IMG de base pour Android.
 </details>
 
 
