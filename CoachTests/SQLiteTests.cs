@@ -179,5 +179,26 @@ namespace CoachTests
             var count = (await _db.GetAllProfilsAsync()).Count;
             Assert.Equal(0, count);
         }
+
+        [Fact]
+        public async Task HistoPage_Tri_PlusRecentEnPremier()
+        {
+            // Arrange
+            var date1 = DateTimeOffset.Now.AddDays(-2);
+            var date2 = DateTimeOffset.Now.AddDays(-1);
+            var date3 = DateTimeOffset.Now;
+            
+            await _db.SaveProfilAsync(new Profil(null, date1, 60, 160, 20, 0));
+            await _db.SaveProfilAsync(new Profil(null, date2, 70, 170, 25, 1));
+            await _db.SaveProfilAsync(new Profil(null, date3, 80, 180, 30, 0));
+
+            // Act
+            var profils = await _db.GetAllProfilsAsync();
+            var trisProfils = profils.OrderByDescending(p => p.Datemesure).ToList();
+
+            // Assert
+            Assert.Equal(date3, trisProfils[0].Datemesure);
+            Assert.Equal(date1, trisProfils[2].Datemesure);
+        }
     }
 }
