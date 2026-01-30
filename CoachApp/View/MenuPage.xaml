@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MauiAppCoach.View.MenuPage"
+             Title="Coach Menu">
+
+    <Grid RowDefinitions="Auto, *, Auto"
+          Padding="20"
+          RowSpacing="20">
+
+        <Border Grid.Row="0"
+                Stroke="Black"
+                StrokeThickness="1"
+                StrokeShape="RoundRectangle 0"
+                Padding="15"
+                BackgroundColor="Transparent">
+
+            <Label Text="Bienvenue sur l'application Coach"
+                   FontSize="18"
+                   FontAttributes="Bold"
+                   HorizontalOptions="Center"
+                   VerticalOptions="Center"
+                   TextColor="white"
+                   HorizontalTextAlignment="Center"/>
+        </Border>
+
+        <Image Grid.Row="1"
+               Source="fitness_light.png"
+               Aspect="AspectFit"
+               HorizontalOptions="Center"
+               VerticalOptions="Center" />
+
+        <VerticalStackLayout Grid.Row="2"
+                             Spacing="15">
+
+            <Button Text="Calcul IMG"
+                    BackgroundColor="#512BD4"
+                    TextColor="White"
+                    HeightRequest="55"
+                    CornerRadius="8"
+                    FontSize="18"
+                    Clicked="BtnCalculIMG_Clicked"/>
+
+            <Button Text="Mon historique"
+                    BackgroundColor="#512BD4"
+                    TextColor="White"
+                    HeightRequest="55"
+                    CornerRadius="8"
+                    FontSize="18"
+                    Clicked="BtnHistorique_Clicked"/>
+
+        </VerticalStackLayout>
+
+    </Grid>
+</ContentPage>

@@ -1,5 +1,6 @@
 ﻿using SQLite;
 using System;
+using System.Text.Json.Serialization;
 
 [Serializable]
 public class Profil
@@ -12,7 +13,7 @@ public class Profil
     private int taille;
     private int age;
     private double img;
-    private string message;
+    private string? message;
 
     // --- Constructeurs ---
 
@@ -46,11 +47,22 @@ public class Profil
     [PrimaryKey, AutoIncrement]
     public int Id { get; set; }
 
+    [JsonIgnore]
     public DateTimeOffset Datemesure
     {
         get => datemesure;
         set => datemesure = value;
     }
+
+    [JsonPropertyName("datemesure")]
+    public string DatemesureString
+    {
+        get => datemesure.ToString("yyyy-MM-dd HH:mm:ss");
+        set => datemesure = DateTimeOffset.Parse(value);
+    }
+
+    [JsonIgnore]
+    public DateTimeOffset DatemesureLocale => Datemesure.ToLocalTime();
 
     public int Sexe
     {
@@ -84,8 +96,22 @@ public class Profil
 
     public string Message
     {
-        get => message;
+        get => message ?? string.Empty;
         set => message = value;
+    }
+
+    [Ignore] // Indique à SQLite de ne pas sauvegarder cette propriété en BDD
+    public string Couleur
+    {
+        get
+        {
+            // Si le message est "Parfait.", on retourne du Vert
+            if (this.Message == "Parfait.")
+                return "#2E8B57"; // SeaGreen (un vert joli)
+
+            // Sinon (Trop maigre ou Surpoids), on retourne du Rouge (ou une autre couleur d'alerte)
+            return "#DC143C"; // Crimson (un rouge pas trop agressif)
+        }
     }
 
     // --- Méthodes de calcul ---

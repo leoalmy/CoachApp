@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.Logging;
+using MauiAppCoach.View;
 
 namespace MauiAppCoach
 {
@@ -26,6 +27,7 @@ namespace MauiAppCoach
 
             // 3. Enregistrer tes pages (Important pour que l'injection fonctionne)
             builder.Services.AddTransient<MainPage>();
+
             // AddTransient crée une nouvelle instance de la page à chaque fois qu'on y va.
 
 #if DEBUG

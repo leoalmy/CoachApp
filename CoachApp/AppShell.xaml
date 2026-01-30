@@ -8,7 +8,7 @@
 
     <ShellContent
         Title="Coach"
-        ContentTemplate="{DataTemplate local:MainPage}"
-        Route="MainPage" />
+        ContentTemplate="{DataTemplate local:View.MenuPage}"
+        Route="MenuPage" />
 
 </Shell>

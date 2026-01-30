@@ -1,11 +1,11 @@
-﻿namespace MauiAppCoach
+﻿namespace MauiAppCoach.View
 {
     /// <summary>
     /// Page principale de l'application CoachAppV1.
     /// </summary>
     public partial class MainPage : ContentPage
     {
-        private Profil leProfil;
+        private Profil? leProfil;
         private readonly SQLiteDb _sqliteDbCoach; // Utilisation de l'instance injectée
 
         /// <summary>
@@ -15,10 +15,10 @@
         public MainPage(SQLiteDb database)
         {
             InitializeComponent();
-            
+
             // On récupère la base de données injectée
             _sqliteDbCoach = database;
-            
+
             // Chargement des données au démarrage
             SQLiteSelect();
         }
