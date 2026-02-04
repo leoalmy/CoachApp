@@ -1,4 +1,6 @@
-﻿namespace MauiAppCoach.View
+﻿using CoachLibrairie;
+
+namespace MauiAppCoach.View
 {
     /// <summary>
     /// Page principale de l'application CoachAppV1.
@@ -6,21 +8,17 @@
     public partial class MainPage : ContentPage
     {
         private Profil? leProfil;
-        private readonly SQLiteDb _sqliteDbCoach; // Utilisation de l'instance injectée
+        private readonly AccesDistant accesDistant = new AccesDistant();
 
         /// <summary>
-        /// Initialise une nouvelle instance de la page principale avec injection de la BDD.
+        /// Initialise une nouvelle instance de la page principale.
         /// </summary>
-        /// <param name="database">L'instance de SQLiteDb fournie par MauiProgram</param>
-        public MainPage(SQLiteDb database)
+        public MainPage()
         {
             InitializeComponent();
 
-            // On récupère la base de données injectée
-            _sqliteDbCoach = database;
-
-            // Chargement des données au démarrage
-            SQLiteSelect();
+            accesDistant = new AccesDistant();
+            HttpRequestSelect();
         }
 
         private async void BtnCalculer_Clicked(object sender, EventArgs e)
@@ -34,10 +32,10 @@
                 int sexe = rbHomme.IsChecked ? 1 : 0;
 
                 // 2. Création de l'objet Profil
-                leProfil = new Profil(null, DateTimeOffset.Now, poids, taille, age, sexe);
+                leProfil = new Profil(DateTimeOffset.Now, poids, taille, age, sexe);
 
-                // 3. Insertion asynchrone dans la base de données
-                await _sqliteDbCoach.SaveProfilAsync(leProfil);
+                // 3. Envoi des données au serveur distant
+                HttpRequestInsert(leProfil);
 
                 // 4. Affichage du résultat
                 await AffichageResultatAsync(leProfil);
@@ -97,23 +95,31 @@
             );
         }
 
-        private async void SQLiteSelect()
+        private async void HttpRequestInsert(Profil profil)
         {
-            // On récupère le dernier profil depuis la base de données
-            leProfil = await _sqliteDbCoach.GetLastProfilAsync();
+            await accesDistant.AjoutProfil(profil);
+        }
+
+        private async void HttpRequestSelect()
+        {
+            leProfil = await accesDistant.RecupDernierProfil();
 
             if (leProfil != null)
             {
                 entPoids.Text = leProfil.Poids.ToString();
                 entTaille.Text = leProfil.Taille.ToString();
                 entAge.Text = leProfil.Age.ToString();
-
                 if (leProfil.Sexe == 1)
+                {
                     rbHomme.IsChecked = true;
+                }
                 else
+                {
                     rbFemme.IsChecked = true;
+                }
 
-                // On attend que la page soit prête pour lancer l'affichage
+                leProfil.MajProfil();
+
                 await AffichageResultatAsync(leProfil);
             }
         }

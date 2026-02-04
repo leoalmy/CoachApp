@@ -1,12 +1,10 @@
-﻿using SQLite;
-using System;
+﻿using System;
 using System.Text.Json.Serialization;
 
 [Serializable]
 public class Profil
 {
     // --- Attributs privés ---
-    private readonly Nullable<int> id;
     private DateTimeOffset datemesure;
     private int sexe;
     private int poids;
@@ -17,10 +15,9 @@ public class Profil
 
     // --- Constructeurs ---
 
-    public Profil(int? unId, DateTimeOffset uneDate, int unPoids, int uneTaille, int unAge, int unSexe)
+    public Profil(DateTimeOffset uneDate, int unPoids, int uneTaille, int unAge, int unSexe)
     {
         // On passe par les propriétés pour déclencher les logiques si besoin
-        this.Id = unId ?? 0; // Gestion du null pour la BDD
         this.Datemesure = uneDate;
         this.Poids = unPoids;
         this.Taille = uneTaille;
@@ -43,10 +40,6 @@ public class Profil
     }
 
     // --- Propriétés (Getters / Setters) ---
-
-    [PrimaryKey, AutoIncrement]
-    public int Id { get; set; }
-
     [JsonIgnore]
     public DateTimeOffset Datemesure
     {
@@ -100,7 +93,7 @@ public class Profil
         set => message = value;
     }
 
-    [Ignore] // Indique à SQLite de ne pas sauvegarder cette propriété en BDD
+    //Cette propriété n'est pas sauvegardé dans la BDD
     public string Couleur
     {
         get
@@ -142,5 +135,11 @@ public class Profil
             else if (this.Img <= 20) this.Message = "Parfait.";
             else this.Message = "Surpoids.";
         }
+    }
+
+    public void MajProfil()
+    {
+        CalculIMG();
+        ResultatIMG();
     }
 }
