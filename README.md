@@ -1,12 +1,21 @@
 <details>
   <summary><b>📜 Historique des versions (cliquer pour dérouler)</b></summary>
 
+  ### v5.0 (Dernière version)
+  - **Base de données distante** : Migration de SQLite local vers une API REST cloud.
+  - **Communication HTTP/REST** : Nouvelle classe `AccesDistant` pour la synchronisation avec le serveur.
+  - **Synchronisation multi-appareils** : Accès aux profils depuis n'importe quel appareil via le cloud.
+  - **Sérialisation JSON** : Échange de données structuré avec le serveur via JSON.
+  - **Endpoints API sécurisés** : Communication DDNS avec un serveur backend dédié.
+  - Disponible à cette adresse -> [v5.0](https://github.com/leoalmy/CoachApp/tree/v5-distant-database)
+
   ### v4.0
   - **Navigation multi-page** avec AppShell pour une meilleure expérience utilisateur.
   - **Injection de dépendances** (DI) pour une architecture plus robuste et testable.
   - **Page d'historique** : Consultation et visualisation des profils avec tri chronologique.
   - **Architecture par couches** : Séparation claire entre UI (MAUI), logique métier et persistance.
   - **Gestion centralisée de la base de données** : SQLiteDb enregistré en Singleton pour un accès unifié.
+  - Disponible à cette adresse -> [v4.0](https://github.com/leoalmy/CoachApp/tree/v4-history)
 
   ### v3.0
   - **Passage de JSON à SQLite** pour une gestion robuste des données.
@@ -20,9 +29,11 @@
   - Gestion persistante des données via `FileSystem.AppDataDirectory`.
   - Ajout de la bibliothèque de classes `CoachLibrairie`.
   - Animations UI (`FadeTo`) et feedback haptique.
+  - Disponible à cette adresse -> [v2.0](https://github.com/leoalmy/CoachApp/tree/v2-serialisation-json)
 
   ### v1.0
-  - [Version initiale](https://github.com/leoalmy/CoachApp) : Calcul d'IMG de base pour Android.
+  - Calcul d'IMG de base pour Android.
+  - Disponible à cette adresse -> [v1.0](https://github.com/leoalmy/CoachApp)
 </details>
 
 
